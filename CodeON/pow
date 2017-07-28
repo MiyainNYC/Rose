@@ -1,0 +1,12 @@
+x = 3
+n =3
+
+def power(x,n):
+    value = 1
+    while n>=1:
+        value = value*x
+        n -=1
+    print(value)
+
+
+power(4,5)
