@@ -1,0 +1,30 @@
+matrix_a = [
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+def matrix_condense(matrix_a):
+    """
+    :type matrix: List[List[int]]
+    :rtype: List[int]
+    """
+    list_ = []
+    for i in range(len(matrix_a)):
+        for j in range(len(matrix_a[0])):
+            list_.append(matrix_a[i][j])
+    print(list_)
+
+matrix_condense(matrix_a)
+
+def matrix_T(matrix_a):
+    """
+    :type matrix: List[List[int]]
+    :rtype: List[int]
+    """
+    print(len(matrix_a[0]))
+    matrix_Ted = [[matrix_a[j][i] for j in range(len(matrix_a))] for i in range(len(matrix_a[0]))]
+    print(matrix_Ted)
+    for row in matrix_Ted:
+        print(row)
+
+matrix_T(matrix_a)

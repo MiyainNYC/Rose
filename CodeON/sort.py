@@ -1,5 +1,15 @@
 l = [3,4,88,1,4,5,0,3]
 
+## divide and conquer
+def qsort(array):
+    if len(array) < 2:
+        return array
+    head, *tail = array
+    less = qsort([i for i in tail if i < head])
+    more = qsort([i for i in tail if i >= head])
+    return less+[head]+more
+
+
 def sort_list(l):
     sorted_list = [None]*len(l)
     leng = len(l)
@@ -24,7 +34,8 @@ def sort_list(l):
         e-=1
     print(sorted_list)
 
-sort_list(l)
+l = qsort(l)
+print(l)
 
 
 
