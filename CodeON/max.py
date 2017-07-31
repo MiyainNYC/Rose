@@ -11,7 +11,7 @@ def max_find(array):
 max_value = max_find(l)
 print(max_value)
 
-def find_min(array):
+def find_min(k,array):
     if len(array)==1:
         return array[0]
 

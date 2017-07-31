@@ -1,0 +1,17 @@
+l = [1, 23, 12, 9, 30, 2, 50]
+
+
+def K_large(k, l):
+    if len(l) < 2:
+        return l
+
+    head = l[0]
+
+    larger = K_large(k, [i for i in l[1:] if i > head])
+    smaller = K_large(k, [i for i in l[1:] if i <= head])
+
+    return list(larger + [head] + smaller)[:k]
+
+
+result = K_large(3,l)
+print(result)
