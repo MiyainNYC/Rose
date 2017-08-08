@@ -4,7 +4,7 @@ def max_find(array):
     if len(array) ==1:
         return array[0]
     head = array[0]
-    more = max_find([i for i in array if i > head]+[head])
+    more = max_find([i for i in array[1:] if i > head]+[head])
     return more
 
 
@@ -12,14 +12,15 @@ max_value = max_find(l)
 print(max_value)
 
 def find_min(k,array):
-    if len(array)==1:
-        return array[0]
+    if len(array)<=k:
+        return array
 
     head = array[0]
 
-    lower = find_min([i for i in array if i < head]+[head])
+    lower = find_min(k,[i for i in array[1:] if i < head])
+    higher =find_min(k,[i for i in array[1:] if i > head])
 
-    return lower
+    return list(lower+[head]+higher)[:k]
 
-min_value = find_min(l)
+min_value = find_min(3,l)
 print(min_value)

@@ -10,3 +10,17 @@ def power(x,n):
 
 
 power(4,5)
+
+def power2(x,n):
+    a = x
+    while n==0:
+        return 1
+    while n==1:
+        return x
+    while n>=2:
+        x = x*a
+        n -=1
+        return power2(x,n)
+
+result = power2(3,3)
+print(result)

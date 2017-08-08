@@ -15,3 +15,20 @@ def K_large(k, l):
 
 result = K_large(3,l)
 print(result)
+
+
+
+def K_large2(k, l):
+    if len(l) == k:
+        return l
+
+    head = l[0]
+
+    larger = K_large(k, [i for i in l[1:] if i > head])
+    smaller = K_large(k, [i for i in l[1:] if i <= head])
+
+    return list(larger + [head] + smaller)[:k]
+
+
+result = K_large2(3,l)
+print(result)
