@@ -22,7 +22,7 @@ group by d.name
 
 4. find records in table a that are not in table b without using NOT IN operator \
 select * from a \
-**Minus** \
+**Minus**; **intersect**; **union** \
 select * from b \
 
 5. In sql, null cannot be compared with itself. Therefore, null =  null is not true. We can compare null with a 
@@ -216,6 +216,35 @@ connect by PRIOR emp_id = manager_id
 
 51. create an empty table from an existing table. \
 create table a as select * from existing_table where 1>2 \
+
+52. generate row number in the rank of salary \
+select row_number() over(order by salary desc) \
+from employee
+
+53. Select first 3 characters of FIRST_NAME from EMPLOYEE \
+select **substring**(first_name,1,3) from employee
+
+54. more: http://a4academics.com/interview-questions/53-database-and-sql/397-top-100-database-sql-interview-questions-and-answers-examples-queries?showall=&start=1
+
+55. Get database date \
+SQL Queries in Oracle: select sysdate from dual \ 
+SQL Queries in SQL Server: select getdate() \
+SQL Query in MySQL: select now() \
+
+56. rank employees based on their incentives for a month \
+select rank() over(partition by month(INCENTIVE_DATE) order by salary desc) \
+from employee inner join incentive \
+where employee.id = incentive.empid
+
+57. Select first_name, incentive amount from employee and incentives table for all employees even if they didn't get incentives and set incentive amount as 0 for those employees who didn't get incentives. \
+select first_name, nvl(incentive_amt,0) from employee right outer join incentive \
+**oracle nvl() = sql server isnull() = mysql ifnull()** 
+
+58. Select TOP 2 salary from employee table \
+Oracle: select * from employee order by SALARY desc where rownum <3 \
+SQL Server: select top 2 * from employee order by salary desc
+MySQL: select * from employee order by salary desc limit 2
+
 
 
 
