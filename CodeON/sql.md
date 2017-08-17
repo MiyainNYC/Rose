@@ -141,8 +141,7 @@ where e.deptid = dc.deptid and e.mgrid = m.id
 use **group by** then **count()**
 
 37. delete duplicates: \
-oracle: use **rowid**
-
+oracle: use **rowid** \
 delete from table a\
 where a.rowid > \
 any( select b.rowid from table b \
