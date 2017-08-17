@@ -93,17 +93,14 @@ number \
 null value \
 unique identifier \
 changes \
-usage \
+usage 
 
 22. what is the difference between inner join and outer join? \
-
 23. the difference between left outer join and right outer join? \
-
 24. what is the data type for rowid? \
 string 
 
 25. the difference between where and having? \
-
 26. what is the cardinality in sql? \
 in sql, cardinality is the uniquenesss of data valuesin a column. if cardinality is low, then a column will have more duplicated values
 
@@ -114,22 +111,26 @@ in sql, cardinality is the uniquenesss of data valuesin a column. if cardinality
 
 30. alias cannot be used in **where** clause.
 
-31. **where** clause doesn't automatically conditioned on **Null** values
-
+31. **where** clause doesn't automatically conditioned on **Null** values \
+select * from employee \
+where id NOT IN ( \
+select depid from department \
+where depid IS NOT NULL)
+ 
 32. what is the use of execution plan in sql?
 
 33. select * from a, b return len(a) * len(b) records. **Cartesian product**
 
 34. switch \
-Update employee **SET** deptid = case deptid when 2 then 1 when 1 then 2
+Update employee **SET** deptid = **case** deptid when 2 then 1 when 1 then 2
 
 35. get employee name, manager id and number of employees in the department. \
 **self join** \
 with d_count as ( \
 select deptid, count(*) as d_count \
 from employee \
-group by deptno) \
-select e.name as employee_name, \
+group by deptid) \
+select e.name as employZee_name, \
 m.name as Manager_name, dc.d_count as dept_count \
 from employee e, \
 d_count dc, \
@@ -140,15 +141,47 @@ where e.deptid = dc.deptid and e.mgrid = m.id
 **ask the duplicate criteria** \
 use **group by** then **count()**
 
-37. delete duplicates: \
+37. delete duplicates: **deduplicate**\
 oracle: use **rowid** \
-delete from table a\
+delete from table table a\
 where a.rowid > \
 any( select b.rowid from table b \
 where a.column_1 = b.column_1 \
 and \
 a.column_2 = b.column_2) 
 
-38.  
+38.  the difference betweeen NVL and NVL2 \
+NVL(item to check, alternative_value): if item to check is NULL, then alternate value is returned. If item to check is not NULL, then item to check is returned. \
+NVL2(item to check, alternate_value1, alternate_value2): if null, alternate_value2. else alternate_valu1
+
+39. **ACID** properties in a sql transaction: \
+Atomicity: all or nothing. If any part of transaction is failed, then whole of the transaction is rolled back. If all the parts of transactions are successful, then only Transaction is commited. \
+consistency: once the transaction is complete, it should satisfy all the constraints, triggers, rules etc. \
+isolation: each transaction can be executed separately; \
+durability: transactions are permanent.
+
+40. difference between **rank** and **dense_rank**: \
+(10,10,20,30,30,40) \
+rank: 1,1,3,4,4,6 \
+dense rank: 1,1,2,3,3,4
+
+41. what is the use of **WITH** clause in sql: \
+**With** is used to create a subquery or view for a set of data \
+With fin_employee as (select * from employee where dep_name = 'Finance') \
+select * from fin_employee where age <30 union all \
+select * from fin_employee where gender = 'Female'
+
+42. which sql feature can be used to view data in a table sequentially?
+sequence based on column value: order by \
+sequence based on rows from data: **CURSOR**
+
+43. get student name and number of students in same grade: \
+select a.grade, a.count(*) as student_number from table a left outer join (select name, grade from table b) \
+where a.grade = b.grade \
+group by grade
+
+44. get the list of grades with total score more than average score. \
+
+ 
 
 
