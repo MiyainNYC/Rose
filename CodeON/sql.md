@@ -180,8 +180,42 @@ select a.grade, a.count(*) as student_number from table a left outer join (selec
 where a.grade = b.grade \
 group by grade
 
-44. get the list of grades with total score more than average score. \
+44. get the list of grades with total score more than average score. 
+45. the difference between case and decode in sql
+46. get unique names of products without using distinct: use **group by** \
+select prod_name from product group by prod_name
 
- 
+47. maximum zipcode from a table without using max or min aggregate functions: \
+use **self join** to find the list of zipcodes that are smaller than at least one other zipcode. \
+select distinct zipcode from zipcode_list where zipcode NOT IN ( \
+select smaller_list.zipcode from zipcode_list AS larger_list \
+join zipcode_list AS smaller_list \
+where smaller_list.code < larger_list.zipcode)
+
+48. print a comma separated list of student names in a grade. \
+**listagg** in oracle. it can transpose rows to column type values. We can use delimiter as comma in LISTAGG function. \
+select grade, listagg(NAME,',') within group (order by name) \
+AS students \
+from student \
+group by grade
+
+49. difference between correlated and uncorrelated sub query? \
+correlated sub query: inner subquery and outer main query are interdependent, then we call it a correlated sub query: \
+select e.emp_name \
+from employee e \
+where e.id = (select d.emp_id from dept d where d.dept_id = e.dept_id) \
+
+50. Given an employee table with manager_id as column, print first name, manager id and level of employees in organization structure? \
+in oracle, use **connect by** \
+the starting point will be the employee who does not have a manager \
+**Oracle provides a pseudocolumn LEVEL that gives the level of each record in hierachy.** \
+select f_name. emp_id, manager_id, LEVEL \
+from employee \
+start with emp_id = 10 \
+connect by PRIOR emp_id = manager_id
+
+51. create an empty table from an existing table. \
+create table a as select * from existing_table where 1>2 \
+
 
 
